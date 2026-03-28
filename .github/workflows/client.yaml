@@ -11,10 +11,6 @@ on:
       - 'v*.*.*'
 
 jobs:
-<<<<<<< Updated upstream
-  mi-job:
-    uses: asanchezo-duoc/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@pipeTest
-=======
   usar-receta-compartida:
     # Aquí no repetimos los pasos de Docker: delegamos al otro repositorio
     uses: asanchezo-duoc/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
@@ -26,7 +22,7 @@ jobs:
       image-tag: ${{ github.ref_name }}
 
     # Datos sensibles: usuario y contraseña/token de Docker Hub (configurados en GitHub → Secrets)
->>>>>>> Stashed changes
+    uses: asanchezo-duoc/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
