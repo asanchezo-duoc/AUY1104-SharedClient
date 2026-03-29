@@ -2,7 +2,7 @@ name: Despliegue de API a Docker Hub
 
 on:
   push:
-    branches: ["principal"]
+    branches: ["main"]
 
 jobs:
   desplegar-imagen:
