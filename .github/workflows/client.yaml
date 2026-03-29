@@ -1,9 +1,15 @@
-name: Ejecutar Workflow Reutilizable
+name: Despliegue de API a Docker Hub
 
 on:
   push:
-    branches: ["main"]
+    branches: ["principal"] # O "main", según sea tu rama
 
 jobs:
-  usar-receta-compartida:
-    uses: Ciclo-vida-S-II/AUY1104-SharedWorkflows/.github/workflows/holamundo.yaml@main
+  desplegar-imagen:
+    uses: Ciclo-vida-S-II/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
+    with:
+      image-name: "ciclovida-api-edu" # El nombre que quieras para tu imagen
+      image-tag: "v1.0.0"
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
