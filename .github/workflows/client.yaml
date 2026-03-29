@@ -2,13 +2,13 @@ name: Despliegue de API a Docker Hub
 
 on:
   push:
-    branches: ["principal"] # O "main", según sea tu rama
+    branches: ["principal"]
 
 jobs:
   desplegar-imagen:
     uses: Ciclo-vida-S-II/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
     with:
-      image-name: "ciclovida-api-edu" # El nombre que quieras para tu imagen
+      image-name: "ciclovida-api-edu"
       image-tag: "v1.0.0"
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
