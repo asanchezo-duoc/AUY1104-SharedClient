@@ -46,7 +46,8 @@ function sumar(a, b) {
 }
 
 function respuestaSumaGet(a, b) {
-  const resultado = sumar(a, b);
+  const c = 22;
+  const resultado = sumar(a, c);
   return {
     metodo: 'GET',
     ruta: '/api/suma',
