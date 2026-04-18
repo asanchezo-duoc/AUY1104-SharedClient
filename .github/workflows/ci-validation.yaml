@@ -1,0 +1,27 @@
+name: CI Validation (Push)
+
+on:
+  push:
+    branches:
+      - 'feature/**'    # Se dispara en ramas de desarrollo
+      - 'fix/**'
+      - 'develop'
+    branches-ignore:
+      - 'main'          # REGLA OBLIGATORIA: No corre en main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Ejecutar Pruebas (Unit Tests)
+        run: |
+          npm install
+          npm test  # O el comando que uses para tus pruebas
+      
+      - name: Build Docker Image (SIN PUSH)
+        run: |
+          docker build -t mi-app-test:${{ github.sha }} .
+          # Aquí NO va el docker push. Cumplimos con el punto 4.2
