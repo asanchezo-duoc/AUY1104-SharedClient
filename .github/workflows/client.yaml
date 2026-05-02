@@ -15,13 +15,16 @@ jobs:
     # Aquí no repetimos los pasos de Docker: delegamos al otro repositorio
     uses: asanchezo-duoc/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
 
-    # Valores que le “pasamos” a la receta (nombre de la imagen y qué versión es)
+    # Valores que le “pasamos” a la receta (alineado a deploy-api.yaml en SharedWorkflows)
     with:
       image-name: demo-api
       # Mismo nombre que el tag que disparó el workflow (ej. v1.2.3 → la imagen lleva esa “versión”)
       image-tag: ${{ github.ref_name }}
+      # Variable de repo (Settings → Secrets and variables → Actions → Variables)
+      k3s-server-public-ip: ${{ vars.K3S_SERVER_PUBLIC_IP }}
 
-    # Datos sensibles: usuario y contraseña/token de Docker Hub (configurados en GitHub → Secrets)
+    # Mismos secretos que declara workflow_call en deploy-api.yaml (DOCKER_* + SSH al nodo K3s)
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      EA2_SSH_PRIVATE_KEY: ${{ secrets.EA2_SSH_PRIVATE_KEY }}
