@@ -1,4 +1,3 @@
-# ClusterIP que espera be_docker en ea2-haproxy-academic (prefijo /backend en HAProxy compartido).
 apiVersion: v1
 kind: Service
 metadata:
@@ -6,10 +5,12 @@ metadata:
   labels:
     app: demo-api
 spec:
-  type: ClusterIP
+  # Cambiamos a NodePort para que el puerto 30090 sea válido
+  type: NodePort 
   selector:
     app: demo-api
   ports:
     - name: http
-      port: 3000
-      targetPort: http
+      port: 3000       # Puerto interno del Service
+      targetPort: http # Debe coincidir con el name o número en el Deployment
+      nodePort: 30090  # El puerto fijo que mencionas para el backend
